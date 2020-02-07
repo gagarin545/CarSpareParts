@@ -17,8 +17,8 @@ public class ModelCarEntity {
 
     public ModelCarEntity() { }
 
-    public long getId() {        return id_model;    }
-    public void setId(long id_model) {        this.id_model = id_model;    }
+    public long getId_model() {       return id_model;    }
+    public void setId_model(long id_model) {        this.id_model = id_model;    }
     public String getModel_name() {        return model_name;    }
     public void setModel_name(String model_name) {        this.model_name = model_name;    }
     public MakeCarEntity getMakeCarEntity() {        return makeCarEntity;    }

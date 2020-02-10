@@ -4,19 +4,19 @@
 <html>
   <head><title>Parcel for ${parcel.namedivision}</title></head>
   <body>
-  <h1>Parcel for ${parcel.namedivision}}</h1>
+  <h1>Parcel for ${parcel.car_name}}</h1>
 
   <%--@elvariable id="parcel" type=""--%>
   <form:form modelAttribute="parcel">
-  <form:hidden path="iddivision"/>
+  <form:hidden path="id"/>
   <table>
     <tr>
           <td>Имя :</td>
-          <td><form:input path="namedivision"/></td>
+          <td><form:input path="car_name"/></td>
     </tr>
     <tr>
           <td>Imei :</td>
-          <td><form:input path="idcity"/></td>
+          <td><form:input path="id_model"/></td>
           <td colspan="2"><input type="submit" value="Save Changes"/></td>
      </tr>
   </table>

@@ -33,7 +33,7 @@ public class SpareTest {
         List<SparePartsEntity> spareList = spareService.spareList();
         System.out.println( spareList.size());
         spareList.forEach(x->System.out.println(x.getSpare_name()));
-        SparePartsEntity spare = spareService.spare(  1L );
+        SparePartsEntity spare = spareService.spare(  2L );
         System.out.println(spare.getSpare_name());
 
     }

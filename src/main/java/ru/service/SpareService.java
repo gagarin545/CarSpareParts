@@ -16,5 +16,6 @@ public class SpareService {
     SparePartsEntityRepository sparePartsEntityRepository;
     public List<SparePartsEntity> spareList() { return sparePartsEntityRepository.findAll();}
     public SparePartsEntity spare(long id) { return sparePartsEntityRepository.findByNumer( id);}
+    public List<SparePartsEntity> spareList(GroupPartsEntity group) { return sparePartsEntityRepository.findByspares( group);}
 
 }

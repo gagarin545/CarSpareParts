@@ -19,9 +19,6 @@ public class PartsEntity {
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "id_model", nullable = false)
     private ModelCarEntity modelCarEntity;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "id_group", nullable = false)
-    private GroupPartsEntity groupPartsEntity;
 
     public PartsEntity() {}
 
@@ -35,6 +32,4 @@ public class PartsEntity {
     public void setSparePartsEntity(SparePartsEntity sparePartsEntity) {        this.sparePartsEntity = sparePartsEntity;    }
     public ModelCarEntity getModelCarEntity() {        return modelCarEntity;    }
     public void setModelCarEntity(ModelCarEntity modelCarEntity) {        this.modelCarEntity = modelCarEntity;    }
-    public GroupPartsEntity getGroupPartsEntity() {        return groupPartsEntity;    }
-    public void setGroupPartsEntity(GroupPartsEntity groupPartsEntity) {        this.groupPartsEntity = groupPartsEntity;    }
 }

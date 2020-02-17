@@ -17,7 +17,6 @@ public class GroupController {
     GroupService groupService;
     @GetMapping(value="/{id}")
     public ModelAndView list() {
-        List<GroupPartsEntity> groupList = groupService.groupList();
-        return new ModelAndView("GroupList", "parcels", groupList);
+        return new ModelAndView("GroupList", "groups",  groupService.groupList());
     }
 }

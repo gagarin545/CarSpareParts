@@ -1,5 +1,8 @@
 package ru.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,6 +14,9 @@ public class SparePartsEntity {
     private long id_spare;
     @Column(name="spare_name", length = 200, nullable = false)
     private String spare_name;
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "id_group", nullable = false)
+    private GroupPartsEntity groupPartsEntity;
 
     public SparePartsEntity() {}
 
@@ -18,4 +24,6 @@ public class SparePartsEntity {
     public void setId_spare(long id_spare) {        this.id_spare = id_spare;    }
     public String getSpare_name() {        return spare_name;    }
     public void setSpare_name(String spare_name) {        this.spare_name = spare_name;    }
+    public GroupPartsEntity getGroupPartsEntity() {        return groupPartsEntity;    }
+    public void setGroupPartsEntity(GroupPartsEntity groupPartsEntity) {        this.groupPartsEntity = groupPartsEntity;    }
 }

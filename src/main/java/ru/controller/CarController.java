@@ -8,10 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import ru.entity.MakeCarEntity;
-import ru.entity.ModelCarEntity;
 import ru.service.CarService;
-import ru.service.ModelService;
-
 import java.util.List;
 
 @Controller
@@ -19,24 +16,14 @@ import java.util.List;
 public class CarController {
     @Autowired
     CarService carService;
-    @Autowired
-    ModelService modelService;
     @GetMapping
-    public ModelAndView list() {
-        List<MakeCarEntity> carEntities = carService.carsList();
-        System.out.println("count=" + carEntities.size());
-        return new ModelAndView("CarList", "parcels", carEntities);
-
+    public ModelAndView list(){
+        return new ModelAndView("CarList", "cars", carService.carsList());
     }
-    @GetMapping(value="/model/{id}")
-    public ModelAndView view(@PathVariable Long id) {
-
-        List<ModelCarEntity> model = modelService.modelList( carService.car( id));
-
-        System.out.println("model=" + model.size());
-        if ( model == null) {
-            return new ModelAndView("CarList", HttpStatus.NOT_FOUND);
-        }
-        return new ModelAndView("ModelList", "parcels", model);
+    @GetMapping(value="/CarForm")
+    public ModelAndView form() {
+        List<MakeCarEntity> carEntities = carService.carsList();
+        System.out.println("countent=" + carEntities.size());
+        return new ModelAndView("TestForm", "parcels", carEntities);
     }
 }

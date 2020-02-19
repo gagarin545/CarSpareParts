@@ -34,8 +34,7 @@ public class PartsTest {
 
     @Resource
     ModelService modelService;
-    @Resource
-    GroupService groupService;
+
 
     @Before
     public void setUp() throws Exception {        em = emf.createEntityManager();    }
@@ -44,8 +43,7 @@ public class PartsTest {
     public void  test() {
         SparePartsEntity spare = spareService.spare(  1L );
         ModelCarEntity model = modelService.model(1L);
-        GroupPartsEntity group = groupService.group( 2L);
-        List<PartsEntity> parts = partServise.part(model, group, spare);
+        List<PartsEntity> parts = partServise.part(model, spare);
         System.out.println(spare.getSpare_name());
         parts.forEach(x-> System.out.println( x.getCost() + x.getPhoto()));
 

@@ -11,7 +11,7 @@ import ru.entity.SparePartsEntity;
 import java.util.List;
 
 public interface PartsEntityRepository extends JpaRepository<PartsEntity, Long> {
-    @Query("select b from PartsEntity b where b.modelCarEntity = :model  and b.sparePartsEntity = :spare")
+    @Query("select b from PartsEntity b where b.modelCarEntity = :model and b.sparePartsEntity = :spare")
     List<PartsEntity> findByNumer(@Param("model") ModelCarEntity model, @Param("spare")SparePartsEntity spare);
 
 }

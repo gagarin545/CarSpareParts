@@ -14,5 +14,5 @@ import java.util.List;
 public class PartServise {
     @Autowired
     PartsEntityRepository partsEntityRepository;
-    public List<PartsEntity> part(ModelCarEntity model, GroupPartsEntity group, SparePartsEntity spare) { return partsEntityRepository.findByNumer(model, spare);    }
+    public List<PartsEntity> part(ModelCarEntity model, SparePartsEntity spare) { return partsEntityRepository.findByNumer(model, spare);    }
 }

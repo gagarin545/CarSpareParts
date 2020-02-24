@@ -51,13 +51,16 @@ public class CarRestController {
     @GetMapping(value="id_part/{id_spare}")
     public List<PartsEntity> viewParts(@PathVariable String id_spare) {
         List<PartsEntity> parts = null;
-        System.out.print(id_spare.split("&")[0]);
-        SparePartsEntity spare = spareService.spare(Long.parseLong(id_spare.split("&")[0]));
-        ModelCarEntity model = modelService.model( Long.parseLong(id_spare.split("&")[1]));
-        parts =partServise.part( model, spare );
-        parts.forEach(x-> System.out.print(x.getCost() + x.getPhoto() + x.getId_parts()));
-        System.out.println( ">>" + model.getModel_name() + "|" + spare.getSpare_name());
+        String[] s = id_spare.split("&");
+        if(!id_spare.contains("undefined"))
+            parts = partServise.part(modelService.model(Long.parseLong( s[1])), spareService.spare(Long.parseLong( s[0])));
         return parts;
+    }
+    @GetMapping(value="part/{id_spare}")
+    public PartsEntity viewPart(@PathVariable String id_spare) {
+        PartsEntity part = null;
+        System.out.print(id_spare);
+        return part;
     }
 }
 

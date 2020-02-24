@@ -7,11 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.entity.GroupPartsEntity;
 import ru.entity.ModelCarEntity;
+import ru.entity.PartsEntity;
 import ru.entity.SparePartsEntity;
-import ru.service.CarService;
-import ru.service.GroupService;
-import ru.service.ModelService;
-import ru.service.SpareService;
+import ru.service.*;
 
 import java.util.List;
 
@@ -26,6 +24,8 @@ public class CarRestController {
     GroupService groupService;
     @Autowired
     SpareService spareService;
+    @Autowired
+    PartServise partServise;
     @GetMapping(value="id_model/model/{id}")
     public List<ModelCarEntity> viewModel(@PathVariable Long id) {
         List<ModelCarEntity> models = null;
@@ -47,6 +47,15 @@ public class CarRestController {
         spares = spareService.spareList( group);
         System.out.println(group.getGroup_name() + " spare =" + spares.size());
         return spares;
+    }
+    @GetMapping(value="id_part/{id}")
+    public List<PartsEntity> viewParts(@PathVariable Long id) {
+        List<PartsEntity> parts = null;
+        SparePartsEntity spare = spareService.spare( id);
+        ModelCarEntity model = modelService.model( id);
+        parts =partServise.part( model, spare );
+        System.out.println( ">>" + model.getModel_name() + "|" + spare.getSpare_name());
+        return parts;
     }
 }
 

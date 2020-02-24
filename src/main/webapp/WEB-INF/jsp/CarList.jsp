@@ -21,14 +21,15 @@
   </label><br>
   <label for="id_group" class="name-group">
       <select id="id_group">
-          <option disabled > Группа </option>
+          <option disabled selected > Группа </option>
       </select>
   </label><br>
   <label for="id_spare" class="name-spare">
       <select id="id_spare">
-          <option disabled value="">Запчасть </option>
+          <option disabled selected>Запчасть </option>
       </select>
   </label>
+
 
   <div>    <!-- buttons holder -->
       <button onclick="location.href='/car/CarForm'">Добавить производителя</button>
@@ -37,15 +38,20 @@
   <script>
       $(document).ready(function()
       {
-          $('#id_car').change(function() { fillOptions('id_car', 'id_model' , model_name); });
+          $('#id_car').change(function() { fillOptions('id_car', 'id_model'); });
           $('#id_model').change(function() { fillOptions('id_model', 'id_group'); });
           $('#id_group').change(function() { fillOptions('id_group', 'id_spare'); });
-          $('#id_spare').change(function() { fillOptions('id_spare', "id_part"); });
+          $('#id_spare').change(function() { fillOptions( 'id_spare', 'id_part'); });
+       //   $('#id_spare').change(function() { newOptions( 'id_spare'); });
       });
-      function fillOptions(parentId, ddId, d) {
+      function newOptions(parentId) {
+
+      }
+      function fillOptions(parentId, ddId) {
           var dd = $('#' + ddId);
           var jsonURL = '/' + ddId + "/" + $('#' + parentId + ' :selected').val();
-          $("span").text(jsonURL);
+          let spare, model;
+
           $.getJSON(jsonURL, function(opts) {
             //  alert(`opts[0]`.d);
               $('>option', dd).remove(); // Clean old options first.
@@ -57,9 +63,14 @@
                               break;
                           case "id_group":
                               dd.append($('<option/>').val(value.id_group).text(value.group_name));
+                              model = ($('#' + parentId + ' :selected').val());
+                              $("span").text(model);
                               break;
                           case "id_spare":
                               dd.append($('<option/>').val(value.id_spare).text(value.spare_name));
+                              break;
+                          case "is_part":
+                              $("span").text($('#' + parentId + ' :selected').val());
                               break;
                       }
                   });
@@ -68,6 +79,7 @@
                   dd.append($('<option/>').text("Please select parent"));
               }
           });
+          $("span").text(model);
       }
   </script>
   </body>

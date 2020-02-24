@@ -11,4 +11,6 @@ public class CarService {
     CarsEntityRepository carsEntityRepository;
     public List<MakeCarEntity> carsList() { return carsEntityRepository.findAll(); }
     public MakeCarEntity car(long id) { return carsEntityRepository.findByNumer( id); }
+    public MakeCarEntity carName(String car) { return carsEntityRepository.findByName( car); }
+    public void carAdd(MakeCarEntity car) { carsEntityRepository.saveAndFlush( car); }
 }

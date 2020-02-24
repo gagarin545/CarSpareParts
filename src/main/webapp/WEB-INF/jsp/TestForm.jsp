@@ -9,20 +9,24 @@
 <html>
   <head><title>Parcel for ${parcel.car_name}</title></head>
   <body>
-  <h1>Parcel for ${parcel.car_name}</h1>
-  <%
-      @Autowired
-      CarService carService;
+  <head><title>Parcel for ${parcel.car_name}</title></head>
+  <body>
+  <h1>Parcel for ${parcel.car_name}}</h1>
 
-      List<MakeCarEntity> cars = carService.carsList();
-      cars.forEach(x-> {
-          try {
-              out.println(x.getCar_name());
-          } catch (IOException e) {
-              e.printStackTrace();
-          }
-      });
-  %>
-
+  <%--@elvariable id="parcel" type=""--%>
+  <form:form modelAttribute="parcel">
+      <form:hidden path="id"/>
+      <table>
+          <tr>
+              <td>Имя :</td>
+              <td><form:input path="car_name"/></td>
+          </tr>
+          <tr>
+              <td>Imei :</td>
+              <td><form:input path="id_model"/></td>
+              <td colspan="2"><input type="submit" value="Save Changes"/></td>
+          </tr>
+      </table>
+  </form:form>
   </body>
 </html>

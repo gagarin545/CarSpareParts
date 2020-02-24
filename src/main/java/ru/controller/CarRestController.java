@@ -30,14 +30,14 @@ public class CarRestController {
     public List<ModelCarEntity> viewModel(@PathVariable Long id) {
         List<ModelCarEntity> models = null;
         models = modelService.modelList( carService.car( id));
-        System.out.println("model =" + models.size());
+        models.forEach(x-> System.out.println(x.getModel_name() + "|" + x.getId_model()));
         return models;
     }
     @GetMapping(value="id_group/{id}")
     public List<GroupPartsEntity> viewGroup(@PathVariable Long id) {
         List<GroupPartsEntity> groups = null;
         groups = groupService.groupList();
-        System.out.println("group =" + groups.size());
+        groups.forEach(x-> System.out.println(x.getGroup_name() + "|" +  x.getId_group()));
         return groups;
     }
     @GetMapping(value="id_spare/{id}")
@@ -48,12 +48,14 @@ public class CarRestController {
         System.out.println(group.getGroup_name() + " spare =" + spares.size());
         return spares;
     }
-    @GetMapping(value="id_part/{id}")
-    public List<PartsEntity> viewParts(@PathVariable Long id) {
+    @GetMapping(value="id_part/{id_spare}")
+    public List<PartsEntity> viewParts(@PathVariable String id_spare) {
         List<PartsEntity> parts = null;
-        SparePartsEntity spare = spareService.spare( id);
-        ModelCarEntity model = modelService.model( id);
+        System.out.print(id_spare.split("&")[0]);
+        SparePartsEntity spare = spareService.spare(Long.parseLong(id_spare.split("&")[0]));
+        ModelCarEntity model = modelService.model( Long.parseLong(id_spare.split("&")[1]));
         parts =partServise.part( model, spare );
+        parts.forEach(x-> System.out.print(x.getCost() + x.getPhoto() + x.getId_parts()));
         System.out.println( ">>" + model.getModel_name() + "|" + spare.getSpare_name());
         return parts;
     }

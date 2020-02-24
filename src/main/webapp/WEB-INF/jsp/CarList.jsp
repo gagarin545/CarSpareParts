@@ -31,26 +31,43 @@
   </label>
 
 
-  <div>    <!-- buttons holder -->
+  <div class="ui-button">    <!-- buttons holder -->
       <button onclick="location.href='/car/CarForm'">Добавить производителя</button>
   </div>
-  <span></span>
+  <div id="id_part" >
+      <span></span>
+  </div>
+
   <script>
       $(document).ready(function()
       {
           $('#id_car').change(function() { fillOptions('id_car', 'id_model'); });
           $('#id_model').change(function() { fillOptions('id_model', 'id_group'); });
           $('#id_group').change(function() { fillOptions('id_group', 'id_spare'); });
-          $('#id_spare').change(function() { fillOptions( 'id_spare', 'id_part'); });
+          $('#id_spare').change(function() { newOptions( 'id_spare', 'id_part'); });
        //   $('#id_spare').change(function() { newOptions( 'id_spare'); });
       });
-      function newOptions(parentId) {
-
+      let spare, model;
+      function newOptions(parentId, ddId) {
+          var jsonURL = '/' + ddId + "/" + $('#' + parentId + ' :selected').val() + '&' + model ;
+          var dd = $('#' + ddId);
+          $.getJSON(jsonURL, function(opts) {
+              //  alert(`opts[0]`.d);
+              $("span", dd).remove(); // Clean old options first.
+              if (opts) {
+                  $.each(opts, function(key, value) {
+                      dd.append($('<a  href=\>').val(value.id_parts).text(value.cost).append(" - ").append(value.photo)).append('<br>');
+                  });
+              }
+              else {
+                  dd.append($('<option/>').text("Please select parent"));
+              }
+          });
       }
       function fillOptions(parentId, ddId) {
           var dd = $('#' + ddId);
           var jsonURL = '/' + ddId + "/" + $('#' + parentId + ' :selected').val();
-          let spare, model;
+
 
           $.getJSON(jsonURL, function(opts) {
             //  alert(`opts[0]`.d);
@@ -70,7 +87,7 @@
                               dd.append($('<option/>').val(value.id_spare).text(value.spare_name));
                               break;
                           case "is_part":
-                              $("span").text($('#' + parentId + ' :selected').val());
+                              $("span").text(model);
                               break;
                       }
                   });
@@ -79,7 +96,7 @@
                   dd.append($('<option/>').text("Please select parent"));
               }
           });
-          $("span").text(model);
+          $("div.ui-button.name-spare").text(model);
       }
   </script>
   </body>

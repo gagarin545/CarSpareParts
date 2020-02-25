@@ -8,12 +8,17 @@
 
   <%--@elvariable id="cars" type=""--%>
   <form:form modelAttribute="cars">
-  <form:hidden path="id"/>
+
   <table>
     <tr>
-        <td>Производитель :</td>
-        <td><form:input path="car_name"/></td>
-        <td colspan="1"><input type="submit" value="Save Changes"/></td>
+      <td>Производитель :</td>
+      <td><form:input path="car_name"/></td>
+    </tr>
+    <tr>
+      <td>Модель :</td>
+      <td><form:input path="model_name"/></td>
+    </tr>
+      <td colspan="2"><input type="submit" value="Save Changes"/></td>
     </tr>
   </table>
   </form:form>
